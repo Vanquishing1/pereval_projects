@@ -104,6 +104,72 @@ uvicorn app.main:app --reload --host 127.0.0.1
 }
 ```
 
+---
+
+## Документация API (Swagger)
+
+После запуска проекта Swagger UI доступен по адресу:
+
+```
+http://127.0.0.1:8000/docs
+```
+
+Альтернатива — ReDoc:
+```
+http://127.0.0.1:8000/redoc
+```
+
+## Примеры работы с API
+
+### POST /submitData/
+
+Добавление нового перевала. Пример тела запроса:
+
+```json
+{
+  "user": {
+    "email": "test@example.com",
+    "family_name": "Иванов",
+    "name": "Иван",
+    "patronymic": "Иванович",
+    "phone": "89999999999"
+  },
+  "beauty_title": "пер.",
+  "title": "Пример перевала",
+  "other_titles": "",
+  "connect": "",
+  "add_time": "2023-04-01 12:00:00",
+  "coords": {
+    "latitude": 45.0,
+    "longitude": 7.0,
+    "height": 1200
+  },
+  "level": {
+    "winter": "1A",
+    "summer": "1A",
+    "autumn": "1A",
+    "spring": "1A"
+  },
+  "images": []
+}
+```
+
+---
+
+## Тестирование
+
+Для запуска тестов выполните:
+
+```bash
+pytest tests/
+```
+
+Перед этим убедитесь, что:
+
+- PostgreSQL запущен
+- Указаны корректные данные подключения в `.env`
+- Таблицы базы данных созданы (см. `fstr_db.sql`)
+
 ## Авторы
 
 - Проект выполнен в рамках курса SkillFactory Python-разработчик.
