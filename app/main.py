@@ -2,10 +2,21 @@ from fastapi import FastAPI, HTTPException, Query
 from app.models import PerevalData
 from app.db_manager import DBManager
 from fastapi.responses import HTMLResponse
+from pydantic import BaseModel
+from typing import Optional
 
-app = FastAPI()
+app = FastAPI(
+    title="Pereval API",
+    description="API для подачи и управления данными о перевалах",
+    version="1.0.0"
+)
 
-@app.post("/submitData/")
+class SubmitResponse(BaseModel):
+    status: int
+    message: str
+    id: Optional[int] = None
+
+@app.post("/submitData/", response_model=SubmitResponse, summary="Отправить данные о перевале")
 def submit_data(data: PerevalData):
     db = DBManager()
     try:
